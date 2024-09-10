@@ -13,13 +13,20 @@ RUN python3 get-platformio.py
 RUN rm get-platformio.py
 RUN export PATH="$PATH:/root/.platformio/penv/bin/"
 # adding the platformio installation folder to the PATH variable in the bashrc
-RUN echo "PATH=\"$PATH:/root/.platformio/penv/bin/\"" >> /root/.bashrc
+# RUN echo "PATH=\"$PATH:/root/.platformio/penv/bin/\"" >> /root/.bashrc
+
+RUN mkdir /root/.vscode-server/
+RUN mkdir /root/.vscode-server/data/
+RUN mkdir /root/.vscode-server/data/Machine
+RUN echo "{\"platformio-ide.useBuiltinPIOCore\": false,\"platformio-ide.useBuiltinPython\": false,\"platformio-ide.customPATH\": \"/root/.platformio/penv/bin/\"}" > /root/.vscode-server/data/Machine/settings.json
 
 
 # setting up a project to install all needed boards
 RUN mkdir tmp
 RUN export INSTALL_BOARD_LIST="uno"
-RUN /root/.platformio/penv/bin/pio project init -d tmp -b uno -b megaatmega2560 -b uno_r4_wifi
+# -b uno_r4_wifi
+RUN /root/.platformio/penv/bin/pio project init -d tmp -b uno -b megaatmega2560
+RUN cd tmp ; /root/.platformio/penv/bin/pio project run -t upload ; cd ..
 
 # remove porject folder we used to install the boards
 RUN rm -rfd tmp
