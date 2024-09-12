@@ -25,6 +25,8 @@ RUN /root/.platformio/penv/bin/pio project init -d tmp -b uno -b megaatmega2560 
 RUN touch tmp/src/main.cpp
 RUN printf "#include <Arduino.h>\nvoid setup(){Serial.begin(9600);} void loop(){Serial.println(\"Hello\");delay(5000);}" > tmp/src/main.cpp
 RUN cd tmp ; /root/.platformio/penv/bin/pio run -t upload --upload-port /dev/null ; cd ..
+RUN pio settings set check_update_interval 99999999999999
+RUN pio settings set enable_telemetry No
 
 # remove porject folder we used to install the boards
 RUN rm -rfd tmp
