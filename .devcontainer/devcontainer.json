@@ -1,0 +1,12 @@
+{
+"name": "Ubuntu",
+"runArgs": ["--privileged"],
+"build": {
+"docker file": "Dockerfile"
+},
+"extensions": [
+"platformio.platformio-ide",
+"ms-vscode.cpptools"
+],
+"postStartCommand": "echo \"{\\\"terminal.integrated.shell.linux\\\": \\\"/bin/bash\\\",\\\"platformio-ide.useBuiltinPython\\\" false,\\\"platformio-ide.useBuiltinPIOCore\\\": false,\\\"platformio-ide.customPath\\\": \\\"/root/.platformino/penv/bin\\\"}\" > /root/.vscode-server/data/Machine/settings.json"
+}
