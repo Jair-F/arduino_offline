@@ -21,7 +21,7 @@ RUN curl -fsSL https://raw.githubusercontent.com/platformio/platformio-core/deve
 RUN mkdir tmp
 RUN export INSTALL_BOARD_LIST="uno"
 # -b uno_r4_wifi
-RUN /root/.platformio/penv/bin/pio project init -d tmp -b uno -b megaatmega2560 -b uno_r4_wifi
+RUN /root/.platformio/penv/bin/pio project init -d tmp -b uno -b megaatmega2560 -b uno_r4_wifi -b sparkfun_samd51_thing_plus
 RUN touch tmp/src/main.cpp
 RUN printf "#include <Arduino.h>\nvoid setup(){Serial.begin(9600);} void loop(){Serial.println(\"Hello\");delay(5000);}" > tmp/src/main.cpp
 RUN cd tmp ; /root/.platformio/penv/bin/pio run -t upload --upload-port /dev/null ; cd ..
