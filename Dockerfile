@@ -1,6 +1,6 @@
 FROM mcr.microsoft.com/vscode/devcontainers/base:ubuntu-22.04
 
-
+USER root
 WORKDIR /root
 
 # packages the platformio-cli installer needs to install
@@ -27,6 +27,8 @@ RUN printf "#include <Arduino.h>\nvoid setup(){Serial.begin(9600);} void loop(){
 RUN cd tmp ; /root/.platformio/penv/bin/pio run -t upload --upload-port /dev/null ; cd ..
 #RUN /root/.platformio/penv/bin/pio settings set check_update_interval 99999999999999
 #RUN /root/.platformio/penv/bin/pio settings set enable_telemetry No
+
+RUN echo "$PATH:/root/.platformio/penv/bin/" >> ~/.bashrc
 
 # remove porject folder we used to install the boards
 RUN rm -rfd tmp
