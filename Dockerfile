@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/vscode/devcontainer/base:ubuntu-22.04
+FROM mcr.microsoft.com/vscode/devcontainers/base:ubuntu-22.04
 
 
 WORKDIR /root
